@@ -7,16 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Empresa;
-import model.metodología.CondiciónComparativa;
-import model.metodología.CondiciónTaxativa;
-import model.metodología.CondiciónTaxocomparativa;
-import model.metodología.ConstructorDeCondiciónComparativa;
-import model.metodología.ConstructorDeCondiciónTaxativa;
-import model.metodología.ConstructorDeCondiciónTaxocomparativa;
-import model.metodología.ConstructorDeMetodología;
-import model.metodología.Metodología;
-import model.metodología.Orden;
-import model.metodología.Prioridad;
+import model.metodologia.CondicionComparativa;
+import model.metodologia.CondicionTaxativa;
+import model.metodologia.CondicionTaxocomparativa;
+import model.metodologia.ConstructorDeCondicionComparativa;
+import model.metodologia.ConstructorDeCondicionTaxativa;
+import model.metodologia.ConstructorDeCondicionTaxocomparativa;
+import model.metodologia.ConstructorDeMetodologia;
+import model.metodologia.Metodologia;
+import model.metodologia.Orden;
+import model.metodologia.Prioridad;
 import model.repositorios.RepositorioDeEmpresas;
 import model.repositorios.RepositorioDeIndicadores;
 import model.repositorios.Repositorios;
@@ -26,7 +26,7 @@ import modelo.fuentes.FuenteDeIndicadorDePrueba;
 import static modelo.fuentes.FuenteDeEmpresaDePrueba.*;
 import static org.junit.Assert.*;
 
-public class PruebaDeMetodologíaDeBuffet {
+public class PruebaDeMetodologiaDeBuffet {
 
 	private class FuenteDeEmpresaDePruebaParaLaMetodologíaDeBuffet extends FuenteDeEmpresaDePrueba {
 		@Override
@@ -129,8 +129,8 @@ public class PruebaDeMetodologíaDeBuffet {
 	 * Maximizar ROE: una empresa es mejor que otra si durante los últimos
 	 * 10 años, su ROE fue consistentemente mejor que el de la otra.
 	 */
-	private CondiciónComparativa crearCondiciónParaMaximizarROE() {
-		return new ConstructorDeCondiciónComparativa("ROE").conNúmeroDePeríodos(10)
+	private CondicionComparativa crearCondiciónParaMaximizarROE() {
+		return new ConstructorDeCondicionComparativa("ROE").conNúmeroDePeríodos(10)
 				.conPrioridad(Prioridad.ALTA).construir();
 	}
 
@@ -138,8 +138,8 @@ public class PruebaDeMetodologíaDeBuffet {
 	 * Minimizar el nivel de deuda: una empresa es mejor que otra si su
 	 * proporción de deuda es menor.
 	 */
-	private CondiciónComparativa crearCondiciónParaMinimizarElNivelDeDeuda() {
-		return new ConstructorDeCondiciónComparativa("NivelDeDeuda").conOrden(Orden.MENOR)
+	private CondicionComparativa crearCondiciónParaMinimizarElNivelDeDeuda() {
+		return new ConstructorDeCondicionComparativa("NivelDeDeuda").conOrden(Orden.MENOR)
 				.conPrioridad(Prioridad.MEDIA).construir();
 	}
 
@@ -148,32 +148,32 @@ public class PruebaDeMetodologíaDeBuffet {
 	 * empresa en la que su margen durante los últimos 10 años fue siempre
 	 * creciente.
 	 */
-	private CondiciónTaxativa crearCondiciónDeMárgenesCrecientes() {
-		return new ConstructorDeCondiciónTaxativa("Márgenes").conNúmeroDePeríodos(10).construir();
+	private CondicionTaxativa crearCondiciónDeMárgenesCrecientes() {
+		return new ConstructorDeCondicionTaxativa("Márgenes").conNúmeroDePeríodos(10).construir();
 	}
 
 	/**
 	 * Longevidad: sólo vale la pena invertir en empresas con más de 10 años.
 	 * Además, una empresa es mejor que otra si es más antigua.
 	 */
-	private CondiciónTaxocomparativa crearCondiciónDeLongevidad() {
-		return new ConstructorDeCondiciónTaxocomparativa("Longevidad").conValorDeReferencia(10.0)
+	private CondicionTaxocomparativa crearCondiciónDeLongevidad() {
+		return new ConstructorDeCondicionTaxocomparativa("Longevidad").conValorDeReferencia(10.0)
 				.conPrioridad(Prioridad.BAJA).construir();
 	}
 
 	@Test
 	public void probarMetodología() throws Exception {
-		ConstructorDeMetodología constructor = new ConstructorDeMetodología("Buffet");
+		ConstructorDeMetodologia constructor = new ConstructorDeMetodologia("Buffet");
 		constructor.agregarCondición(crearCondiciónParaMaximizarROE());
 		constructor.agregarCondición(crearCondiciónParaMinimizarElNivelDeDeuda());
 		constructor.agregarCondición(crearCondiciónDeMárgenesCrecientes());
 		constructor.agregarCondición(crearCondiciónDeLongevidad());
-		Metodología metodología = constructor.construir();
+		Metodologia metodologia = constructor.construir();
 
 		List<Empresa> empresas = Repositorios.obtenerRepositorioDeEmpresas().todos();
 		List<Empresa> resultadoEsperado = empresas("E5", "E1", "E2");
 
-		empresas = metodología.aplicar(empresas);
+		empresas = metodologia.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, resultadoEsperado));
 	}
 }

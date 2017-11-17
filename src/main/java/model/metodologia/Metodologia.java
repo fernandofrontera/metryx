@@ -1,4 +1,4 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ import model.Empresa;
 import model.Entidad;
 
 @Entity(name="Metodologías")
-public class Metodología extends Entidad {
+public class Metodologia extends Entidad {
 	
 	@JsonProperty
 	private String nombre;
@@ -29,42 +29,42 @@ public class Metodología extends Entidad {
 	@JsonProperty
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval= true) 
 	@JoinColumn(name="metodologia_id") @Where(clause = "tipo = 'COMP'")
-	List<CondiciónComparativa> condicionesComparativas;
+	List<CondicionComparativa> condicionesComparativas;
 	
 	@JsonProperty
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval= true)  
 	@JoinColumn(name="metodologia_id") @Where(clause = "tipo = 'TAX'")
-	List<CondiciónTaxativa> condicionesTaxativas;
+	List<CondicionTaxativa> condicionesTaxativas;
 		
 	@JsonProperty
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval= true) 
 	@JoinColumn(name="metodologia_id") @Where(clause = "tipo = 'TAXCOMP'")
-	List<CondiciónTaxocomparativa> condicionesTaxocomparativas;
+	List<CondicionTaxocomparativa> condicionesTaxocomparativas;
 	
 	@SuppressWarnings("unused")
-	private Metodología() {}
+	private Metodologia() {}
 	
 	@JsonCreator
-	Metodología(
+	Metodologia(
 			@JsonProperty("nombre") String nombre,
-			@JsonProperty("condicionesTaxativas") List<CondiciónTaxativa> condicionesTaxativas,
-			@JsonProperty("condicionesComparativas") List<CondiciónComparativa> condicionesComparativas,
-			@JsonProperty("condicionesTaxocomparativas") List<CondiciónTaxocomparativa> condicionesTaxocomparativas) {
+			@JsonProperty("condicionesTaxativas") List<CondicionTaxativa> condicionesTaxativas,
+			@JsonProperty("condicionesComparativas") List<CondicionComparativa> condicionesComparativas,
+			@JsonProperty("condicionesTaxocomparativas") List<CondicionTaxocomparativa> condicionesTaxocomparativas) {
 		this.nombre = nombre;
 		this.condicionesTaxativas = condicionesTaxativas;
 		this.condicionesComparativas = condicionesComparativas;
 		this.condicionesTaxocomparativas = condicionesTaxocomparativas;
 	}
 
-	public List<CondiciónComparativa> getCondicionesComparativas() {
+	public List<CondicionComparativa> getCondicionesComparativas() {
 		return condicionesComparativas;
 	}
 
-	public List<CondiciónTaxativa> getCondicionesTaxativas() {
+	public List<CondicionTaxativa> getCondicionesTaxativas() {
 		return condicionesTaxativas;
 	}
 
-	public List<CondiciónTaxocomparativa> getCondicionesTaxocomparativas() {
+	public List<CondicionTaxocomparativa> getCondicionesTaxocomparativas() {
 		return condicionesTaxocomparativas;
 	}
 
@@ -82,10 +82,10 @@ public class Metodología extends Entidad {
 	}
 	
 	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas) {
-		for(Condición condiciónTaxativa : condicionesTaxativas) {
-			empresas = condiciónTaxativa.aplicar(empresas);
+		for(Condicion condicionTaxativa : condicionesTaxativas) {
+			empresas = condicionTaxativa.aplicar(empresas);
 		}
-		for(CondiciónTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
+		for(CondicionTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
 			empresas = condicionTaxocomparativa.obtenerCondiciónTaxativa().aplicar(empresas);
 		}
 		return empresas;
@@ -95,11 +95,11 @@ public class Metodología extends Entidad {
 		if (condicionesComparativas.isEmpty()) return empresas;
 		Map<String, Integer> pesos = new HashMap<>();
 		
-		for(CondiciónComparativa condiciónComparativa : condicionesComparativas) {
+		for(CondicionComparativa condiciónComparativa : condicionesComparativas) {
 			actualizarPesos(pesos, condiciónComparativa.obtenerPrioridad(), condiciónComparativa.aplicar(empresas));
 		}
 		
-		for(CondiciónTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
+		for(CondicionTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
 			actualizarPesos(pesos, condicionTaxocomparativa.obtenerCondiciónComparativa().obtenerPrioridad(), condicionTaxocomparativa.obtenerCondiciónComparativa().aplicar(empresas));
 		}
 		
@@ -118,7 +118,7 @@ public class Metodología extends Entidad {
 		}		
 	}
 	
-	public void eliminarCondicion(Condición condicion) {
+	public void eliminarCondicion(Condicion condicion) {
 		this.condicionesComparativas.remove(condicion);
 		this.condicionesTaxativas.remove(condicion);
 	}
@@ -132,9 +132,9 @@ public class Metodología extends Entidad {
 		return empresas.stream().filter(empresa -> empresa.getNombre().equals(nombre)).findFirst().get();
 	}
 
-	public void actualizar(List<CondiciónTaxativa> condicionesTaxativas,
-			List<CondiciónComparativa> condicionesComparativas,
-			List<CondiciónTaxocomparativa> condicionesTaxocomparativas) {
+	public void actualizar(List<CondicionTaxativa> condicionesTaxativas,
+			List<CondicionComparativa> condicionesComparativas,
+			List<CondicionTaxocomparativa> condicionesTaxocomparativas) {
 		this.condicionesTaxativas = condicionesTaxativas;
 		this.condicionesComparativas = condicionesComparativas;
 		this.condicionesTaxocomparativas = condicionesTaxocomparativas;

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.metodología.Metodología;
+import model.metodologia.Metodologia;
 import model.repositorios.fuentes.FuenteDeMetodologia;
 
 public class RepositorioDeMetodologias {
 	
 	private FuenteDeMetodologia source;
 	
-	public List<Metodología> metodologias;
+	public List<Metodologia> metodologias;
 	
 	
 
@@ -21,30 +21,30 @@ public class RepositorioDeMetodologias {
 		this.metodologias = new ArrayList<>(this.source.cargar());
 	}
 	
-	public void setMetodologias(List<Metodología> metodologias) {
+	public void setMetodologias(List<Metodologia> metodologias) {
 		this.metodologias = new ArrayList<>(metodologias); //fixme fede
 	}
 	
-	public List<Metodología> todos(){
+	public List<Metodologia> todos(){
 		return this.metodologias;
 	}
 	
-	public Metodología encontrar(String nombre){
+	public Metodologia encontrar(String nombre){
 		return this.metodologias.stream().filter(c -> c.obtenerNombre().equals(nombre)).findFirst().orElse(null);
 	}
 	
-	public void agregar(Metodología metodologia) {
+	public void agregar(Metodologia metodologia) {
 		this.metodologias.add(metodologia);
 		guardar();
 	}
 
-	public void remover(Metodología metodologia) {
+	public void remover(Metodologia metodologia) {
 		this.metodologias.remove(metodologia);
 		source.remover(metodologia);
 		guardar();
 	}
 	
-	public void reemplazar(Metodología oldMetodologia, Metodología newMetodologia) {
+	public void reemplazar(Metodologia oldMetodologia, Metodologia newMetodologia) {
 		this.metodologias.remove(oldMetodologia);
 		this.metodologias.add(newMetodologia);
 		this.source.actualizar(oldMetodologia, newMetodologia);

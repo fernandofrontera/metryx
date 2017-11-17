@@ -2,17 +2,17 @@ package model.repositorios.fuentes;
 
 import java.util.List;
 
-import model.metodología.Metodología;
+import model.metodologia.Metodologia;
 import model.repositorios.RepositorioDeMetodologias;
 
 
 public interface FuenteDeMetodologia {
 	
-	public List<Metodología> cargar();
+	public List<Metodologia> cargar();
 		
-	public default void guardar(RepositorioDeMetodologias repositorio, List<Metodología> metodologias) {}
+	public default void guardar(RepositorioDeMetodologias repositorio, List<Metodologia> metodologias) {}
 		
-	public default void remover(Metodología metodologia) {}
+	public default void remover(Metodologia metodologia) {}
 
-	public default void actualizar(Metodología original, Metodología nuevo) {}
+	public default void actualizar(Metodologia original, Metodologia nuevo) {}
 }

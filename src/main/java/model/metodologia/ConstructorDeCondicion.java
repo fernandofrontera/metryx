@@ -1,20 +1,20 @@
-package model.metodología;
+package model.metodologia;
 
 
 import model.indicador.Indicador;
 import model.repositorios.Repositorios;
 
-public abstract class ConstructorDeCondición<T extends ConstructorDeCondición<T>> {
+public abstract class ConstructorDeCondicion<T extends ConstructorDeCondicion<T>> {
 
 	protected String nombre;
 	protected String nombreDelIndicador;
 	protected int númeroDePeríodos;
-	protected Evaluación evaluación;
+	protected Evaluacion evaluacion;
 	protected Orden orden;
 	protected Prioridad prioridad;
 	protected Double valorDeReferencia;
 	
-	public ConstructorDeCondición(String nombre) {
+	public ConstructorDeCondicion(String nombre) {
 		// Precondición: que el indicador exista
 		// Si no se define nombre del indicador, se usa el nombre de la condición
 		this.nombre = nombre;
@@ -22,7 +22,7 @@ public abstract class ConstructorDeCondición<T extends ConstructorDeCondición<
 		
 		// Valores por defecto
 		this.númeroDePeríodos = 1;
-		this.evaluación = Evaluación.PROMEDIO;
+		this.evaluacion = Evaluacion.PROMEDIO;
 		this.orden = Orden.MAYOR;
 		this.prioridad = Prioridad.MEDIA;
 		//this.valorDeReferencia = Optional.empty();
@@ -36,8 +36,8 @@ public abstract class ConstructorDeCondición<T extends ConstructorDeCondición<
 		this.númeroDePeríodos = númeroDePeríodos;
 	}
 	
-	public void establecerEvaluación(Evaluación evaluación) {
-		this.evaluación = evaluación;
+	public void establecerEvaluación(Evaluacion evaluacion) {
+		this.evaluacion = evaluacion;
 	}
 	
 	public void establecerOrden(Orden orden) {
@@ -54,8 +54,8 @@ public abstract class ConstructorDeCondición<T extends ConstructorDeCondición<
 		return obtenerEsto();
 	}
 	
-	public T conEvaluación(Evaluación evaluación) {
-		establecerEvaluación(evaluación);
+	public T conEvaluación(Evaluacion evaluacion) {
+		establecerEvaluación(evaluacion);
 		return obtenerEsto();
 	}
 	
@@ -72,7 +72,7 @@ public abstract class ConstructorDeCondición<T extends ConstructorDeCondición<
 		return indicador;
 	}
 	
-	public abstract Condición construir();
+	public abstract Condicion construir();
 	
 	protected abstract T obtenerEsto();
 }

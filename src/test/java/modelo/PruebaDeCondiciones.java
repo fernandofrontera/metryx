@@ -6,12 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Empresa;
-import model.metodología.Condición;
-import model.metodología.ConstructorDeCondiciónComparativa;
-import model.metodología.ConstructorDeCondiciónTaxativa;
-import model.metodología.ConstructorDeCondiciónTaxocomparativa;
-import model.metodología.Evaluación;
-import model.metodología.Orden;
+import model.metodologia.Condicion;
+import model.metodologia.ConstructorDeCondicionComparativa;
+import model.metodologia.ConstructorDeCondicionTaxativa;
+import model.metodologia.ConstructorDeCondicionTaxocomparativa;
+import model.metodologia.Evaluacion;
+import model.metodologia.Orden;
 import model.repositorios.RepositorioDeEmpresas;
 import model.repositorios.RepositorioDeIndicadores;
 import model.repositorios.Repositorios;
@@ -32,86 +32,86 @@ public class PruebaDeCondiciones {
 	
 	@Test
 	public void probarCondiciónTaxativaNoAplicable() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxativa("I1").construir();
+		Condicion condicion = new ConstructorDeCondicionTaxativa("I1").construir();
 		List<Empresa> empresas = empresas("E1", "E3");
-		assertFalse(condición.esAplicable(empresas));
+		assertFalse(condicion.esAplicable(empresas));
 	}
 	
 	@Test
 	public void probarCondiciónTaxativaAplicable() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxativa("I1").construir();
+		Condicion condicion = new ConstructorDeCondicionTaxativa("I1").construir();
 		List<Empresa> empresas = empresas("E1");
-		assertTrue(condición.esAplicable(empresas));
+		assertTrue(condicion.esAplicable(empresas));
 	}
 	
 	@Test
 	public void probarCondiciónTaxativaMenorAValorDeReferencia() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxativa("I1")
+		Condicion condicion = new ConstructorDeCondicionTaxativa("I1")
 				.conValorDeReferencia(50000.0).conOrden(Orden.MENOR).construir();
 		
 		List<Empresa> empresas = empresas("E1", "E2");
 		List<Empresa> filtradas = empresas("E2");
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, filtradas));
 	}
 	
 	@Test
 	public void probarCondiciónTaxativaTendenciaCreciente() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxativa("I4").conNúmeroDePeríodos(5).construir();
+		Condicion condicion = new ConstructorDeCondicionTaxativa("I4").conNúmeroDePeríodos(5).construir();
 		
 		List<Empresa> empresas = empresas("E2", "E1", "E3");
 		List<Empresa> filtradas = empresas("E2", "E1");
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, filtradas));
 	}
 	
 	@Test
 	public void probarCondiciónTaxativaMedianaMayorAUnValor() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxativa("I4")
-				.conNúmeroDePeríodos(5).conEvaluación(Evaluación.MEDIANA).conValorDeReferencia(500.0).construir();
+		Condicion condicion = new ConstructorDeCondicionTaxativa("I4")
+				.conNúmeroDePeríodos(5).conEvaluación(Evaluacion.MEDIANA).conValorDeReferencia(500.0).construir();
 		
 		List<Empresa> empresas = empresas("E3");
 		List<Empresa> filtradas = empresas();
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, filtradas));
 	}
 	
 	@Test
 	public void probarCondiciónComparativaPromedioCreciente() throws Exception {
-		Condición condición = new ConstructorDeCondiciónComparativa("I5")
+		Condicion condicion = new ConstructorDeCondicionComparativa("I5")
 				.conNúmeroDePeríodos(3).construir();
 		
 		List<Empresa> empresas  = empresas("E1", "E3", "E2", "E4");
 		List<Empresa> ordenadas = empresas("E3", "E4", "E1", "E2");
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, ordenadas));
 	}
 	
 	@Test
 	public void probarCondiciónComparativaSumatoriaDecreciente() throws Exception {
-		Condición condición = new ConstructorDeCondiciónComparativa("I5")
-				.conNúmeroDePeríodos(3).conEvaluación(Evaluación.SUMATORIA).conOrden(Orden.MENOR).construir();
+		Condicion condicion = new ConstructorDeCondicionComparativa("I5")
+				.conNúmeroDePeríodos(3).conEvaluación(Evaluacion.SUMATORIA).conOrden(Orden.MENOR).construir();
 		
 		List<Empresa> empresas  = empresas("E4", "E2", "E1", "E3");
 		List<Empresa> ordenadas = empresas("E2", "E1", "E4", "E3");
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, ordenadas));
 	}
 	
 	@Test
 	public void probarCondiciónTaxocomparativa() throws Exception {
-		Condición condición = new ConstructorDeCondiciónTaxocomparativa("I5")
+		Condicion condicion = new ConstructorDeCondicionTaxocomparativa("I5")
 				.conOrden(Orden.MENOR).conValorDeReferencia(5000.0).construir();
 		
 		List<Empresa> empresas  = empresas("E1", "E3", "E4", "E2");
 		List<Empresa> ordenadas = empresas("E4", "E3");
 		
-		empresas = condición.aplicar(empresas);
+		empresas = condicion.aplicar(empresas);
 		assertTrue(empresasSonIguales(empresas, ordenadas));
 	}
 }

@@ -1,4 +1,4 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,23 +14,23 @@ import model.indicador.Indicador;
 
 @Entity
 @DiscriminatorValue("TAX")
-public final class CondiciónTaxativa extends Condición {
+public final class CondicionTaxativa extends Condicion {
 	
 	@JsonProperty
 	private Double valorDeReferencia;
 
 	@SuppressWarnings("unused")
-	private CondiciónTaxativa() {}
+	private CondicionTaxativa() {}
 
 	@JsonCreator
-	CondiciónTaxativa(
+	CondicionTaxativa(
 			@JsonProperty("nombre") String nombre,
 			@JsonProperty("indicador") Indicador indicador, 
 			@JsonProperty("númeroDePeríodos") int númeroDePeríodos,
-			@JsonProperty("evaluacion") Evaluación evaluación, 
+			@JsonProperty("evaluacion") Evaluacion evaluacion,
 			@JsonProperty("orden") Orden orden,
 			@JsonProperty("valorDeReferencia") Double valorDeReferencia) {
-		super(nombre, indicador, númeroDePeríodos, evaluación, orden);
+		super(nombre, indicador, númeroDePeríodos, evaluacion, orden);
 		this.valorDeReferencia = valorDeReferencia;
 	}
 	
@@ -47,7 +47,7 @@ public final class CondiciónTaxativa extends Condición {
 		List<Double> valores = valoresAEvaluar(empresa);
 		
 		if(this.valorDeReferencia != null) {
-			return orden.comparar(evaluación.evaluar(valores), valorDeReferencia);
+			return orden.comparar(evaluacion.evaluar(valores), valorDeReferencia);
 		}
 		
 		// Si no hay valor de referencia, se evalúa la tendencia
@@ -63,7 +63,7 @@ public final class CondiciónTaxativa extends Condición {
 		return "Taxativa";
 	}
 	
-	public Condición getInstance()	{
+	public Condicion getInstance()	{
 		return this;
 	}
 }

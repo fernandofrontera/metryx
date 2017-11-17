@@ -2,7 +2,7 @@ package model.repositorios.fuentes.json;
 
 import java.util.List;
 
-import model.metodología.Metodología;
+import model.metodologia.Metodologia;
 import model.repositorios.RepositorioDeMetodologias;
 import model.repositorios.fuentes.FuenteDeMetodologia;
 
@@ -13,7 +13,7 @@ public class FuenteJsonDeMetodologia implements FuenteDeMetodologia {
 	public CodificadorJson coder;
 	
 	public FuenteJsonDeMetodologia(String nombreDeArchivo){
-		coder = new CodificadorJson(nombreDeArchivo, Metodología.class);
+		coder = new CodificadorJson(nombreDeArchivo, Metodologia.class);
 	}
 	
 	public FuenteJsonDeMetodologia() {
@@ -22,13 +22,13 @@ public class FuenteJsonDeMetodologia implements FuenteDeMetodologia {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Metodología> cargar() {
+	public List<Metodologia> cargar() {
 		
-		return (List<Metodología>) coder.read();
+		return (List<Metodologia>) coder.read();
 	}
 
 	@Override
-	public void guardar(RepositorioDeMetodologias repositorio, List<Metodología> metodologias) {
+	public void guardar(RepositorioDeMetodologias repositorio, List<Metodologia> metodologias) {
 		coder.write(metodologias);
 	}
 

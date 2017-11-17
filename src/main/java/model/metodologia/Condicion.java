@@ -1,4 +1,4 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ import model.indicador.Indicador;
 @Observable
 @Entity(name="Condiciones")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE) @DiscriminatorColumn(name="tipo")
-public abstract class Condición extends Entidad {
+public abstract class Condicion extends Entidad {
 	
 	@JsonProperty
 	protected String nombre;
@@ -33,18 +33,18 @@ public abstract class Condición extends Entidad {
 	protected int númeroDePeríodos;
 	
 	@JsonProperty
-	protected Evaluación evaluación;
+	protected Evaluacion evaluacion;
 	
 	@JsonProperty
 	protected Orden orden;
 	
-	protected Condición() {}
+	protected Condicion() {}
 	
-	protected Condición(String nombre, Indicador indicador, int númeroDePeríodos, Evaluación evaluación, Orden orden) {
+	protected Condicion(String nombre, Indicador indicador, int númeroDePeríodos, Evaluacion evaluacion, Orden orden) {
 		this.nombre = nombre;
 		this.indicador = indicador;
 		this.númeroDePeríodos = númeroDePeríodos;
-		this.evaluación = evaluación;
+		this.evaluacion = evaluacion;
 		this.orden = orden;
 	}
 	
@@ -60,8 +60,8 @@ public abstract class Condición extends Entidad {
 		return númeroDePeríodos;
 	}
 	
-	public Evaluación obtenerEvaluación() {
-		return evaluación;
+	public Evaluacion obtenerEvaluación() {
+		return evaluacion;
 	}
 	
 	public Orden obtenerOrden() {

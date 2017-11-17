@@ -1,25 +1,25 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConstructorDeMetodología {
+public class ConstructorDeMetodologia {
 	
 	private String nombre;
 
 
-	private List<CondiciónTaxativa> condicionesTaxativas = new ArrayList<>();
-	private List<CondiciónComparativa> condicionesComparativas = new ArrayList<>();
-	private List<CondiciónTaxocomparativa> condicionesTaxocomparativas = new ArrayList<>();
+	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<>();
+	private List<CondicionComparativa> condicionesComparativas = new ArrayList<>();
+	private List<CondicionTaxocomparativa> condicionesTaxocomparativas = new ArrayList<>();
 	
-	public ConstructorDeMetodología() {}
+	public ConstructorDeMetodologia() {}
 	
-	public ConstructorDeMetodología(String nombre){
+	public ConstructorDeMetodologia(String nombre){
 		this.nombre = nombre;
 	}
 	
-	public ConstructorDeMetodología(Metodología metodologia){
+	public ConstructorDeMetodologia(Metodologia metodologia){
 		/*~ Para construir una metodologia en base al estado de una anterior ~*/
 		this.nombre = metodologia.obtenerNombre();
 		this.condicionesTaxativas = new ArrayList<>(metodologia.getCondicionesTaxativas());
@@ -30,22 +30,22 @@ public class ConstructorDeMetodología {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void agregarCondición(CondiciónTaxativa condiciónTaxativa) {
+	public void agregarCondición(CondicionTaxativa condiciónTaxativa) {
 		condicionesTaxativas.add(condiciónTaxativa);
 	}
 	
-	public void agregarCondición(CondiciónComparativa condiciónComparativa) {
+	public void agregarCondición(CondicionComparativa condiciónComparativa) {
 		condicionesComparativas.add(condiciónComparativa);
 	}
 	
-	public void agregarCondición(CondiciónTaxocomparativa condiciónTaxocomparativa) {
+	public void agregarCondición(CondicionTaxocomparativa condiciónTaxocomparativa) {
 		condicionesTaxocomparativas.add(condiciónTaxocomparativa);
 		//condicionesTaxativas.add(condiciónTaxocomparativa.obtenerCondiciónTaxativa());
 		//condicionesComparativas.add(condiciónTaxocomparativa.obtenerCondiciónComparativa());
 	}
 	
-	public List<Condición> getCondiciones(){
-		List<Condición> listaCondiciones = new ArrayList<>(this.condicionesTaxativas);
+	public List<Condicion> getCondiciones(){
+		List<Condicion> listaCondiciones = new ArrayList<>(this.condicionesTaxativas);
 		listaCondiciones.addAll(this.condicionesComparativas);
 		listaCondiciones.addAll(this.condicionesTaxocomparativas);
 			
@@ -75,8 +75,8 @@ public class ConstructorDeMetodología {
 		
 	}
 	
-	public Metodología construir() {
-		return new Metodología(nombre, condicionesTaxativas, condicionesComparativas, condicionesTaxocomparativas);
+	public Metodologia construir() {
+		return new Metodologia(nombre, condicionesTaxativas, condicionesComparativas, condicionesTaxocomparativas);
 	}
 	
 }

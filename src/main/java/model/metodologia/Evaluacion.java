@@ -1,9 +1,9 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.Collections;
 import java.util.List;
 
-public enum Evaluación {
+public enum Evaluacion {
 	
 	PROMEDIO, MEDIANA, SUMATORIA;
 	

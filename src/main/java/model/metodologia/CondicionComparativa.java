@@ -1,4 +1,4 @@
-package model.metodología;
+package model.metodologia;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,22 +14,22 @@ import model.indicador.Indicador;
 
 @Entity
 @DiscriminatorValue("COMP")
-public final class CondiciónComparativa extends Condición {
+public final class CondicionComparativa extends Condicion {
 	
 	@JsonProperty
 	private Prioridad prioridad;
 
-	public CondiciónComparativa() {}
+	public CondicionComparativa() {}
 
 	@JsonCreator
-	CondiciónComparativa(
+	CondicionComparativa(
 			@JsonProperty("nombre") String nombre,
 			@JsonProperty("indicador") Indicador indicador,
 			@JsonProperty("númeroDePeríodos") int númeroDePeríodos,
-			@JsonProperty("evaluacion") Evaluación evaluación,
+			@JsonProperty("evaluacion") Evaluacion evaluacion,
 			@JsonProperty("orden") Orden orden,
 			@JsonProperty("prioridad") Prioridad prioridad) {
-		super(nombre, indicador, númeroDePeríodos, evaluación, orden);
+		super(nombre, indicador, númeroDePeríodos, evaluacion, orden);
 		this.prioridad = prioridad;
 	}
 	
@@ -43,8 +43,8 @@ public final class CondiciónComparativa extends Condición {
 	}
 	
 	private int compararEmpresas(Empresa empresa1, Empresa empresa2) {
-		double valor1 = evaluación.evaluar(valoresAEvaluar(empresa1));
-		double valor2 = evaluación.evaluar(valoresAEvaluar(empresa2));
+		double valor1 = evaluacion.evaluar(valoresAEvaluar(empresa1));
+		double valor2 = evaluacion.evaluar(valoresAEvaluar(empresa2));
 		return orden.comparar(valor1, valor2) ? 1 : -1;
 	}
 	

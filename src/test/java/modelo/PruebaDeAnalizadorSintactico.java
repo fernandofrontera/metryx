@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class PruebaDeAnalizadorSintáctico {
+public class PruebaDeAnalizadorSintactico {
 
 	public double evaluar(String formula){
 		/*-- Este metodo evaula una formula sin errores, es decir que se debe chequear antes por errores --*/

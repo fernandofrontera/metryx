@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import model.Empresa;
 import model.Entidad;
 import model.Medida;
-import model.indicador.AnalizadorSintáctico.ParseFailedException;
+import model.indicador.AnalizadorSintactico.ParseFailedException;
 
 @Entity(name="Indicadores")
 public class Indicador extends Entidad implements Medida,Calculable {
@@ -62,7 +62,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 		this.description = description;
 		this.formula = formula;
 		try {
-			this.calculable = new AnalizadorSintáctico().obtenerCalculable(formula);
+			this.calculable = new AnalizadorSintactico().obtenerCalculable(formula);
 		} catch (ParseFailedException e) {}
 	}
 
@@ -91,7 +91,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 		this.description = descripción;
 		this.formula = fórmula;
 		try {
-			this.calculable = new AnalizadorSintáctico().obtenerCalculable(formula);
+			this.calculable = new AnalizadorSintactico().obtenerCalculable(formula);
 		} catch (ParseFailedException e) {}		
 	}
 

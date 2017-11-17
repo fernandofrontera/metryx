@@ -4,36 +4,36 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 
-import model.metodología.Metodología;
+import model.metodologia.Metodologia;
 import model.repositorios.RepositorioDeMetodologias;
 import model.repositorios.fuentes.FuenteDeMetodologia;
 
 public class FuenteJPADeMetodologia implements FuenteDeMetodologia {
 
-	AdministradorJPA<Metodología> jpa = new AdministradorJPA<>(Metodología.class);
-	List<Metodología> metodologias;
+	AdministradorJPA<Metodologia> jpa = new AdministradorJPA<>(Metodologia.class);
+	List<Metodologia> metodologias;
 	
 	@Override
-	public List<Metodología> cargar() {
+	public List<Metodologia> cargar() {
 		this.metodologias = jpa.obtenerTodos();
 		return metodologias;
 	}
 
 	@Override
-	public void guardar(RepositorioDeMetodologias repositorio, List<Metodología> metodologías) {
+	public void guardar(RepositorioDeMetodologias repositorio, List<Metodologia> metodologias) {
 		EntityTransaction transacción = jpa.iniciarTransacción();
-		metodologías.forEach(metodología-> {
+		metodologias.forEach(metodología-> {
 			if(encontrarOriginal(metodología) == null) {
 				jpa.persistir(metodología);
-				metodologias.add(metodología);
+				this.metodologias.add(metodología);
 			}
 		});
 		transacción.commit();
 		repositorio.setMetodologias(this.metodologias);
 	}
 	
-	public void remover(Metodología metodologia) {
-		Metodología original = encontrarOriginal(metodologia);
+	public void remover(Metodologia metodologia) {
+		Metodologia original = encontrarOriginal(metodologia);
 		metodologias.remove(original);
 		if(original == null) return;
 		EntityTransaction transacción = jpa.iniciarTransacción();
@@ -41,13 +41,13 @@ public class FuenteJPADeMetodologia implements FuenteDeMetodologia {
 		transacción.commit();
 	}
 	
-	private Metodología encontrarOriginal(Metodología metodologia) {
+	private Metodologia encontrarOriginal(Metodologia metodologia) {
 		return metodologias.stream().filter(m -> m.obtenerNombre().equals(metodologia.obtenerNombre())).findFirst().orElse(null);
 	}
 	
 	@Override
-	public void actualizar(Metodología viejo, Metodología nuevo) {
-		Metodología original = encontrarOriginal(viejo);
+	public void actualizar(Metodologia viejo, Metodologia nuevo) {
+		Metodologia original = encontrarOriginal(viejo);
 		metodologias.remove(original);
 		EntityTransaction transacción = jpa.iniciarTransacción();
 		jpa.remover(original);

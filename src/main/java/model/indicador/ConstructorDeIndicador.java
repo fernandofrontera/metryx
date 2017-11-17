@@ -1,6 +1,6 @@
 package model.indicador;
 
-import model.indicador.AnalizadorSintáctico.ParseFailedException;
+import model.indicador.AnalizadorSintactico.ParseFailedException;
 
 public class ConstructorDeIndicador {
 	@SuppressWarnings("serial")
@@ -28,7 +28,7 @@ public class ConstructorDeIndicador {
 
 
 	public Indicador construir() throws ExcepciónDeFórmulaInválida {
-		AnalizadorSintáctico parser = new AnalizadorSintáctico();
+		AnalizadorSintactico parser = new AnalizadorSintactico();
 		
 		try {
 			parser.obtenerCalculable(formulaAsString);

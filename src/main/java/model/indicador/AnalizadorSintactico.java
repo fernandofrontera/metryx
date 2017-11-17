@@ -2,7 +2,7 @@ package model.indicador;
 
 import model.repositorios.Repositorios;
 
-public class AnalizadorSintáctico {
+public class AnalizadorSintactico {
 
 	@SuppressWarnings("serial")
 	public class ParseFailedException extends Exception {
