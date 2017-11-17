@@ -42,7 +42,7 @@ public class AnalizadorSintactico {
 		try {
 			return new CalculableNumerico(Double.parseDouble(formula));
 		} catch(NumberFormatException e) {
-			throw new ParseFailedException("Número inválido");
+			throw new ParseFailedException("Numero invalido");
 		}
 	}
 

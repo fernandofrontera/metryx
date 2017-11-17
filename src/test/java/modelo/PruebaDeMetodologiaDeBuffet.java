@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 
 public class PruebaDeMetodologiaDeBuffet {
 
-	private class FuenteDeEmpresaDePruebaParaLaMetodologíaDeBuffet extends FuenteDeEmpresaDePrueba {
+	private class FuenteDeEmpresaDePruebaParaLaMetodologiaDeBuffet extends FuenteDeEmpresaDePrueba {
 		@Override
 		protected void crearEmpresas() {
 			crearEmpresa("E1", empresa -> {
@@ -116,12 +116,12 @@ public class PruebaDeMetodologiaDeBuffet {
 
 	@Before
 	public void inicializar() {
-		Repositorios.establecerRepositorioDeEmpresas(new RepositorioDeEmpresas(new FuenteDeEmpresaDePruebaParaLaMetodologíaDeBuffet()));
+		Repositorios.establecerRepositorioDeEmpresas(new RepositorioDeEmpresas(new FuenteDeEmpresaDePruebaParaLaMetodologiaDeBuffet()));
 		Repositorios.establecerRepositorioDeIndicadores(new RepositorioDeIndicadores(new FuenteDeIndicadorDePrueba()));
 		Repositorios.obtenerRepositorioDeIndicadores().crearIndicadores();
 		FuenteDeIndicadorDePrueba.crearIndicador("ROE", "UN / PN");
 		FuenteDeIndicadorDePrueba.crearIndicador("NivelDeDeuda", "PT / PN");
-		FuenteDeIndicadorDePrueba.crearIndicador("Márgenes", "UN / V");
+		FuenteDeIndicadorDePrueba.crearIndicador("Margenes", "UN / V");
 		FuenteDeIndicadorDePrueba.crearIndicador("Longevidad", "L");
 	}
 
@@ -129,8 +129,8 @@ public class PruebaDeMetodologiaDeBuffet {
 	 * Maximizar ROE: una empresa es mejor que otra si durante los últimos
 	 * 10 años, su ROE fue consistentemente mejor que el de la otra.
 	 */
-	private CondicionComparativa crearCondiciónParaMaximizarROE() {
-		return new ConstructorDeCondicionComparativa("ROE").conNúmeroDePeríodos(10)
+	private CondicionComparativa crearCondicionParaMaximizarROE() {
+		return new ConstructorDeCondicionComparativa("ROE").conNumeroDePeriodos(10)
 				.conPrioridad(Prioridad.ALTA).construir();
 	}
 
@@ -138,7 +138,7 @@ public class PruebaDeMetodologiaDeBuffet {
 	 * Minimizar el nivel de deuda: una empresa es mejor que otra si su
 	 * proporción de deuda es menor.
 	 */
-	private CondicionComparativa crearCondiciónParaMinimizarElNivelDeDeuda() {
+	private CondicionComparativa crearCondicionParaMinimizarElNivelDeDeuda() {
 		return new ConstructorDeCondicionComparativa("NivelDeDeuda").conOrden(Orden.MENOR)
 				.conPrioridad(Prioridad.MEDIA).construir();
 	}
@@ -148,26 +148,26 @@ public class PruebaDeMetodologiaDeBuffet {
 	 * empresa en la que su margen durante los últimos 10 años fue siempre
 	 * creciente.
 	 */
-	private CondicionTaxativa crearCondiciónDeMárgenesCrecientes() {
-		return new ConstructorDeCondicionTaxativa("Márgenes").conNúmeroDePeríodos(10).construir();
+	private CondicionTaxativa crearCondicionDeMargenesCrecientes() {
+		return new ConstructorDeCondicionTaxativa("Margenes").conNumeroDePeriodos(10).construir();
 	}
 
 	/**
 	 * Longevidad: sólo vale la pena invertir en empresas con más de 10 años.
 	 * Además, una empresa es mejor que otra si es más antigua.
 	 */
-	private CondicionTaxocomparativa crearCondiciónDeLongevidad() {
+	private CondicionTaxocomparativa crearCondicionDeLongevidad() {
 		return new ConstructorDeCondicionTaxocomparativa("Longevidad").conValorDeReferencia(10.0)
 				.conPrioridad(Prioridad.BAJA).construir();
 	}
 
 	@Test
-	public void probarMetodología() throws Exception {
+	public void probarMetodologia() throws Exception {
 		ConstructorDeMetodologia constructor = new ConstructorDeMetodologia("Buffet");
-		constructor.agregarCondición(crearCondiciónParaMaximizarROE());
-		constructor.agregarCondición(crearCondiciónParaMinimizarElNivelDeDeuda());
-		constructor.agregarCondición(crearCondiciónDeMárgenesCrecientes());
-		constructor.agregarCondición(crearCondiciónDeLongevidad());
+		constructor.agregarCondicion(crearCondicionParaMaximizarROE());
+		constructor.agregarCondicion(crearCondicionParaMinimizarElNivelDeDeuda());
+		constructor.agregarCondicion(crearCondicionDeMargenesCrecientes());
+		constructor.agregarCondicion(crearCondicionDeLongevidad());
 		Metodologia metodologia = constructor.construir();
 
 		List<Empresa> empresas = Repositorios.obtenerRepositorioDeEmpresas().todos();

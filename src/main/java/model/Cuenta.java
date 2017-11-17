@@ -11,14 +11,14 @@ public class Cuenta extends Entidad {
 	@Column(unique=true)
 	private String nombre;
 	
-	private String descripción;
+	private String descripcion;
 	
 	@SuppressWarnings("unused")
 	private Cuenta() {}
 	
-	public Cuenta(String nombre, String descripción) {
+	public Cuenta(String nombre, String descripcion) {
 		this.nombre = nombre;
-		this.descripción = descripción;
+		this.descripcion = descripcion;
 	}
 
 	public String getNombre() {
@@ -29,11 +29,11 @@ public class Cuenta extends Entidad {
 		this.nombre = nombre;
 	}
 
-	public String getDescripción() {
-		return descripción;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 }

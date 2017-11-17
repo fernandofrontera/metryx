@@ -25,7 +25,7 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 	public List<Indicador> cargar() {
 		this.indicadores = jpa.obtenerTodos();
 		this.indicadores.forEach(indicador -> {
-			indicador.actualizar(indicador.getName(), indicador.obtenerDescripción(), indicador.obtenerFórmula());
+			indicador.actualizar(indicador.getName(), indicador.obtenerDescripcion(), indicador.obtenerFormula());
 		});
 		
 		return indicadores;
@@ -51,7 +51,7 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 	public void guardar(RepositorioDeIndicadores repositorio,List<Indicador> indicators) {
 		List<Indicador> nuevos = new ArrayList<>();
 		
-		EntityTransaction transacción = jpa.iniciarTransacción();
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
 		indicators.forEach(indicador -> {
 			if(encontrarOriginal(indicador) == null) {
 				jpa.persistir(indicador);
@@ -59,7 +59,7 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 				nuevos.add(indicador);
 			}
 		});
-		transacción.commit();
+		transaccion.commit();
 		
 		
 		nuevos.forEach(i-> guardarCalculados(i));
@@ -76,15 +76,15 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
         
         empresas.forEach(empresa -> {
         	periodos.forEach(periodo -> {
-        		if(indicador.esVálidoParaContexto(empresa, periodo)) {
+        		if(indicador.esValidoParaContexto(empresa, periodo)) {
         			nuevos.add(new IndicadorCalculado(indicador, empresa, periodo));
         		}
         	});
         });
         
-		EntityTransaction transacción = jpaCalculados.iniciarTransacción();
+		EntityTransaction transaccion = jpaCalculados.iniciarTransaccion();
 		nuevos.forEach(i -> jpaCalculados.persistir(i));
-		transacción.commit();
+		transaccion.commit();
 		
 		this.indicadoresCalculados.addAll(nuevos);
         
@@ -95,10 +95,10 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 		Indicador original = encontrarOriginal(indicador);
 		if(original == null) return;
 		this.indicadores.remove(original);
-		EntityTransaction transacción = jpa.iniciarTransacción();
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
 		jpa.merge(original);
 		jpa.remover(original);
-		transacción.commit();
+		transaccion.commit();
 		
 		removerCalculados(indicador);
 	}
@@ -107,12 +107,12 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 	public void removerCalculados(Indicador indicador) {
 		List<IndicadorCalculado> calculados = this.indicadoresCalculados.stream().filter(i -> i.getIdIndicador() == indicador.getId()).collect(Collectors.toList());
 		calculados.forEach(x -> this.indicadoresCalculados.remove(x));
-		EntityTransaction transacción = jpaCalculados.iniciarTransacción();
+		EntityTransaction transaccion = jpaCalculados.iniciarTransaccion();
 		calculados.forEach(x -> {
 			jpaCalculados.merge(x);
 			jpaCalculados.remover(x);
 		});
-		transacción.commit();
+		transaccion.commit();
 	}
 	
 	private Indicador encontrarOriginal(Indicador indicador) {
@@ -124,10 +124,10 @@ public class FuenteJPADeIndicador implements FuenteDeIndicador {
 	public void actualizar(Indicador viejo, Indicador nuevo) {
 		Indicador original = encontrarOriginal(viejo);
 		removerCalculados(viejo);
-		EntityTransaction transacción = jpa.iniciarTransacción();
-		original.actualizar(nuevo.getName(), nuevo.obtenerDescripción(), nuevo.obtenerFórmula());
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
+		original.actualizar(nuevo.getName(), nuevo.obtenerDescripcion(), nuevo.obtenerFormula());
 		jpa.merge(original);
-		transacción.commit();
+		transaccion.commit();
 		
 		guardarCalculados(original); // ya que pudo haber cambiado la formula
 	}

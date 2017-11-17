@@ -26,7 +26,7 @@ public final class ConstructorDeCondicionTaxocomparativa extends ConstructorDeCo
 
 	@Override
 	public CondicionTaxocomparativa construir() {
-		return new CondicionTaxocomparativa(nombre, obtenerIndicador(), númeroDePeríodos,
+		return new CondicionTaxocomparativa(nombre, obtenerIndicador(), numeroDePeriodos,
 				evaluacion, orden, valorDeReferencia, prioridad);
 	}
 

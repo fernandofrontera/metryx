@@ -33,14 +33,14 @@ public class CuentaDeEmpresa extends Entidad implements Medida {
 	@JsonCreator
 	public CuentaDeEmpresa(
 			@JsonProperty("name") String nombre,
-			@JsonProperty("description") String descripción,
+			@JsonProperty("description") String descripcion,
 			@JsonProperty("company") String nombreDeEmpresa,
-			@JsonProperty("period") short período,
+			@JsonProperty("period") short periodo,
 			@JsonProperty("value") double valor
 			) {
-		this.cuenta = new Cuenta(nombre, descripción);
+		this.cuenta = new Cuenta(nombre, descripcion);
 		this.companyName = nombreDeEmpresa;
-		this.period = período;
+		this.period = periodo;
 		this.value = valor;
 	}
 	
@@ -50,8 +50,8 @@ public class CuentaDeEmpresa extends Entidad implements Medida {
 	}
 	
 	@JsonSetter("description")
-	private void establecerDescripción(String descripción) {
-		this.cuenta.setDescripción(descripción);
+	private void establecerDescripcion(String descripcion) {
+		this.cuenta.setDescripcion(descripcion);
 	}
 	
 	@JsonGetter("name")
@@ -60,8 +60,8 @@ public class CuentaDeEmpresa extends Entidad implements Medida {
 	}
 	
 	@JsonGetter("description")
-	public String obtenerDescripción() {
-		return cuenta.getDescripción();
+	public String obtenerDescripcion() {
+		return cuenta.getDescripcion();
 	}
 	
 	public String getCompanyName() {

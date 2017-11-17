@@ -2,8 +2,8 @@ let titles = {
 	"/cuentas": "Cuentas",
 	"/indicadores": "Indicadores",
 	"/indicadores/nuevo": "Crear indicador",
-	"/methodologies": "Metodologías",
-	"/login": "Iniciar sesión"
+	"/methodologies": "Metodologias",
+	"/login": "Iniciar sesion"
 };
 
 function setCurrentPage() {

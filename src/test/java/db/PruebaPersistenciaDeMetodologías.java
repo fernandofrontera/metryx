@@ -21,25 +21,25 @@ import model.repositorios.RepositorioDeMetodologias;
 import model.repositorios.Repositorios;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PruebaPersistenciaDeMetodologías {
+public class PruebaPersistenciaDeMetodologias {
 	
 	private RepositorioDeMetodologias repositorio = Repositorios.obtenerRepositorioDeMetodologias();
 	
 	private static Indicador indicador = new Indicador("INDPRUEBA", "", "7094.62 + 1");
-	private static CondicionTaxativa condiciónTaxativa;
-	private static CondicionComparativa condiciónComparativa;
+	private static CondicionTaxativa condicionTaxativa;
+	private static CondicionComparativa condicionComparativa;
 	
 	@BeforeClass
 	public static void inicializar() {
 		Repositorios.obtenerRepositorioDeIndicadores().agregar(indicador);
-		condiciónTaxativa = new ConstructorDeCondicionTaxativa("CONDTAX")
+		condicionTaxativa = new ConstructorDeCondicionTaxativa("CONDTAX")
 				.conIndicador(indicador.getName()).construir();
-		condiciónComparativa = new ConstructorDeCondicionComparativa("CONDCOMP")
+		condicionComparativa = new ConstructorDeCondicionComparativa("CONDCOMP")
 				.conIndicador(indicador.getName()).construir();
 	}
 	
 	@Test
-	public void A_probarInsertarUnaMetodología() throws Exception {
+	public void A_probarInsertarUnaMetodologia() throws Exception {
 		String nombre = "METPRUEBA001";
 		Metodologia metodologia = new ConstructorDeMetodologia(nombre).construir();
 		
@@ -55,12 +55,12 @@ public class PruebaPersistenciaDeMetodologías {
 	}
 	
 	@Test
-	public void B_probarAgregarUnaCondiciónTaxativa() throws Exception {
+	public void B_probarAgregarUnaCondicionTaxativa() throws Exception {
 		List<Metodologia> metodologias = repositorio.todos();
 		assertEquals(1, metodologias.size());
 		
 		ConstructorDeMetodologia constructor = new ConstructorDeMetodologia(metodologias.get(0));
-		constructor.agregarCondición(condiciónTaxativa);
+		constructor.agregarCondicion(condicionTaxativa);
 		Metodologia metodologia = constructor.construir();
 		
 		repositorio.reemplazar(metodologias.get(0), metodologia);
@@ -74,18 +74,18 @@ public class PruebaPersistenciaDeMetodologías {
 		
 		Condicion condicionObtenida = obtenida.getCondicionesTaxativas().get(0);
 		assertNotNull(condicionObtenida);
-		assertEquals(condiciónTaxativa.getNombre(), condicionObtenida.getNombre());
+		assertEquals(condicionTaxativa.getNombre(), condicionObtenida.getNombre());
 		assertSame(indicador, condicionObtenida.obtenerIndicador());
 	}
 	
 	@Test
-	public void C_probarCambiarLaCondiciónAComparativa() throws Exception {
+	public void C_probarCambiarLaCondicionAComparativa() throws Exception {
 		List<Metodologia> metodologias = repositorio.todos();
 		assertEquals(1, metodologias.size());
 		
 		ConstructorDeMetodologia constructor = new ConstructorDeMetodologia(metodologias.get(0));
-		constructor.eliminarCondicion(condiciónTaxativa.getNombre());
-		constructor.agregarCondición(condiciónComparativa);
+		constructor.eliminarCondicion(condicionTaxativa.getNombre());
+		constructor.agregarCondicion(condicionComparativa);
 		Metodologia metodologia = constructor.construir();
 		
 		repositorio.reemplazar(metodologias.get(0), metodologia);
@@ -99,12 +99,12 @@ public class PruebaPersistenciaDeMetodologías {
 		
 		Condicion condicionObtenida = obtenida.getCondicionesComparativas().get(0);
 		assertNotNull(condicionObtenida);
-		assertEquals(condiciónComparativa.getNombre(), condicionObtenida.getNombre());
+		assertEquals(condicionComparativa.getNombre(), condicionObtenida.getNombre());
 		assertSame(indicador, condicionObtenida.obtenerIndicador());
 	}
 	
 	@Test
-	public void D_probarEliminarLaMetodología() {
+	public void D_probarEliminarLaMetodologia() {
 		List<Metodologia> metodologias = repositorio.todos();
 		assertEquals(1, metodologias.size());
 		

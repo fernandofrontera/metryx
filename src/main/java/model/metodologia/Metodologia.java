@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import model.Empresa;
 import model.Entidad;
 
-@Entity(name="Metodologías")
+@Entity(name="Metodologias")
 public class Metodologia extends Entidad {
 	
 	@JsonProperty
@@ -74,7 +74,7 @@ public class Metodologia extends Entidad {
 		
 	public boolean esAplicable(List<Empresa> empresas) {
 		return Stream.concat(condicionesTaxativas.stream(), condicionesComparativas.stream())
-				.allMatch(condición -> condición.esAplicable(empresas));
+				.allMatch(condicion -> condicion.esAplicable(empresas));
 	}
 
 	public List<Empresa> aplicar(List<Empresa> empresas) {
@@ -86,7 +86,7 @@ public class Metodologia extends Entidad {
 			empresas = condicionTaxativa.aplicar(empresas);
 		}
 		for(CondicionTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
-			empresas = condicionTaxocomparativa.obtenerCondiciónTaxativa().aplicar(empresas);
+			empresas = condicionTaxocomparativa.obtenerCondicionTaxativa().aplicar(empresas);
 		}
 		return empresas;
 	}
@@ -95,19 +95,19 @@ public class Metodologia extends Entidad {
 		if (condicionesComparativas.isEmpty()) return empresas;
 		Map<String, Integer> pesos = new HashMap<>();
 		
-		for(CondicionComparativa condiciónComparativa : condicionesComparativas) {
-			actualizarPesos(pesos, condiciónComparativa.obtenerPrioridad(), condiciónComparativa.aplicar(empresas));
+		for(CondicionComparativa condicionComparativa : condicionesComparativas) {
+			actualizarPesos(pesos, condicionComparativa.obtenerPrioridad(), condicionComparativa.aplicar(empresas));
 		}
 		
 		for(CondicionTaxocomparativa condicionTaxocomparativa : condicionesTaxocomparativas) {
-			actualizarPesos(pesos, condicionTaxocomparativa.obtenerCondiciónComparativa().obtenerPrioridad(), condicionTaxocomparativa.obtenerCondiciónComparativa().aplicar(empresas));
+			actualizarPesos(pesos, condicionTaxocomparativa.obtenerCondicionComparativa().obtenerPrioridad(), condicionTaxocomparativa.obtenerCondicionComparativa().aplicar(empresas));
 		}
 		
 		return obtenerEmpresasOrdenadasPorPeso(pesos, empresas);
 	}
 
 	private void actualizarPesos(Map<String, Integer> pesos, Prioridad prioridad, List<Empresa> empresas) {
-		// Agrego puntos segun posición
+		// Agrego puntos segun posicion
 		int i = empresas.size();
 		for(String empresa : empresas.stream().map(e -> e.getNombre()).collect(Collectors.toList())) {
 			Integer peso = pesos.get(empresa);

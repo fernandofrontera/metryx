@@ -50,17 +50,17 @@ public class Empresa extends Entidad {
 		return cuentas.stream().distinct().collect(Collectors.toList());
 	}
 	
-	public List<CuentaDeEmpresa> obtenerCuentas(short período) {
-		return cuentas.stream().filter(m -> m.getPeriod() == período).collect(Collectors.toList());
+	public List<CuentaDeEmpresa> obtenerCuentas(short periodo) {
+		return cuentas.stream().filter(m -> m.getPeriod() == periodo).collect(Collectors.toList());
 	}
 
-	public CuentaDeEmpresa obtenerCuenta(String nombre, short período) {
+	public CuentaDeEmpresa obtenerCuenta(String nombre, short periodo) {
 		return cuentas.stream()
-		            .filter(x -> x.getName().equals(nombre) && x.getPeriod() == período)
+		            .filter(x -> x.getName().equals(nombre) && x.getPeriod() == periodo)
 		            .findFirst().orElse(null);
 	}
 	
-	public List<Short> obtenerPeríodos() {
+	public List<Short> obtenerPeriodos() {
 		return cuentas.stream().map(cuenta -> cuenta.getPeriod()).distinct().sorted().collect(Collectors.toList());
 	}
 	

@@ -36,14 +36,14 @@ public class AdministradorJPA<T> implements WithGlobalEntityManager {
 		return lista;
 	}
 	
-	public EntityTransaction iniciarTransacción() {
-		EntityTransaction transacción = entityManager().getTransaction();
-		transacción.begin();
-		return transacción;
+	public EntityTransaction iniciarTransaccion() {
+		EntityTransaction transaccion = entityManager().getTransaction();
+		transaccion.begin();
+		return transaccion;
 	}
 	
-	public void terminarTransacción(EntityTransaction transacción) {
-		transacción.commit();
+	public void terminarTransaccion(EntityTransaction transaccion) {
+		transaccion.commit();
 	}
 	
 	public void merge(T objeto) { 

@@ -44,7 +44,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 
 		@Override
 		public String getMessage() { 
-			return String.format("Fórmula inválida: %s.", cause);
+			return String.format("Formula invalida: %s.", cause);
 		}
 	}
 	@SuppressWarnings("serial")
@@ -70,7 +70,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 
 	public String getDescription()	{	return description;	}
 
-	public String obtenerFórmula() {
+	public String obtenerFormula() {
 		return formula;
 	}
 
@@ -78,7 +78,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 		return name;		
 	}
 
-	public String obtenerDescripción() {
+	public String obtenerDescripcion() {
 		return description;
 	}
 
@@ -86,10 +86,10 @@ public class Indicador extends Entidad implements Medida,Calculable {
 		return this.calcular(company, period);
 	}
 	
-	public void actualizar(String nombre, String descripción, String fórmula) {
+	public void actualizar(String nombre, String descripcion, String formula) {
 		this.name = nombre;
-		this.description = descripción;
-		this.formula = fórmula;
+		this.description = descripcion;
+		this.formula = formula;
 		try {
 			this.calculable = new AnalizadorSintactico().obtenerCalculable(formula);
 		} catch (ParseFailedException e) {}		
@@ -106,7 +106,7 @@ public class Indicador extends Entidad implements Medida,Calculable {
 		return calculable.getCuentas(); //fixme: quedarse con uno
 	}
 	
-	public boolean esVálidoParaContexto(Empresa company, short period) { 
+	public boolean esValidoParaContexto(Empresa company, short period) {
 		return company.obtenerCuentas(period).stream()
 				.map(m -> m.getName()).collect(Collectors.toSet())
 				.containsAll(calculable.getCuentas());

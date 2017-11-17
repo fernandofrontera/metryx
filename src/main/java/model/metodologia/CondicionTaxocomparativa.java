@@ -21,48 +21,48 @@ public final class CondicionTaxocomparativa extends Condicion {
 	
 	@JsonProperty
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval= true) 
-	@JoinColumn(name="condiciónTaxativa_id") @Where(clause = "tipo = 'TAX'")
-	private CondicionTaxativa condiciónTaxativa;
+	@JoinColumn(name="condicionTaxativa_id") @Where(clause = "tipo = 'TAX'")
+	private CondicionTaxativa condicionTaxativa;
 	
 	@JsonProperty
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval= true) 
-	@JoinColumn(name="CondiciónComparativa_id") @Where(clause = "tipo = 'COMP'")
-	private CondicionComparativa condiciónComparativa;
+	@JoinColumn(name="CondicionComparativa_id") @Where(clause = "tipo = 'COMP'")
+	private CondicionComparativa condicionComparativa;
 	
 	public CondicionTaxocomparativa() {}
 
 	CondicionTaxocomparativa(
 			@JsonProperty("nombre") String nombre, 
 			@JsonProperty("indicador") Indicador indicador,
-			@JsonProperty("númeroDePeríodos") int númeroDePeríodos,
+			@JsonProperty("numeroDePeriodos") int numeroDePeriodos,
 			@JsonProperty("evaluacion") Evaluacion evaluacion,
 			@JsonProperty("orden") Orden orden,
 			@JsonProperty("valorDeReferencia") Double valor,
 			@JsonProperty("prioridad") Prioridad prioridad) {
-		super(nombre, indicador, númeroDePeríodos, evaluacion, orden);
-		condiciónTaxativa = new CondicionTaxativa(nombre, indicador, númeroDePeríodos, evaluacion, orden, valor);
-		condiciónComparativa = new CondicionComparativa(nombre, indicador, númeroDePeríodos, evaluacion, orden, prioridad);
+		super(nombre, indicador, numeroDePeriodos, evaluacion, orden);
+		condicionTaxativa = new CondicionTaxativa(nombre, indicador, numeroDePeriodos, evaluacion, orden, valor);
+		condicionComparativa = new CondicionComparativa(nombre, indicador, numeroDePeriodos, evaluacion, orden, prioridad);
 	}
 	
 	public Double obtenerValorDeReferencia() {
-		return condiciónTaxativa.obtenerValorDeReferencia();
+		return condicionTaxativa.obtenerValorDeReferencia();
 	}
 	
 	public Prioridad obtenerPrioridad() {
-		return condiciónComparativa.obtenerPrioridad();
+		return condicionComparativa.obtenerPrioridad();
 	}
 
 	@Override
 	public List<Empresa> aplicar(List<Empresa> empresas) {
-		return condiciónComparativa.aplicar(condiciónTaxativa.aplicar(empresas));
+		return condicionComparativa.aplicar(condicionTaxativa.aplicar(empresas));
 	}
 	
-	CondicionTaxativa obtenerCondiciónTaxativa() {
-		return condiciónTaxativa;
+	CondicionTaxativa obtenerCondicionTaxativa() {
+		return condicionTaxativa;
 	}
 	
-	CondicionComparativa obtenerCondiciónComparativa() {
-		return condiciónComparativa;
+	CondicionComparativa obtenerCondicionComparativa() {
+		return condicionComparativa;
 	}
 	
 	public String getTipo()	{

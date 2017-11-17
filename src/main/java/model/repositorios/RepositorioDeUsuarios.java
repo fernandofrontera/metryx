@@ -29,12 +29,12 @@ public class RepositorioDeUsuarios {
 		return usuarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
 	}
 	
-	public Usuario encontrarPorCorreoElectrónico(String email) {
+	public Usuario encontrarPorCorreoElectronico(String email) {
 		return usuarios.stream().filter(u -> u.getEmail().equals(email)).findFirst().orElse(null);
 	}
 	
 	public boolean validarCredenciales(String email, String password) {
-		Usuario usuario = encontrarPorCorreoElectrónico(email);
+		Usuario usuario = encontrarPorCorreoElectronico(email);
 		if(usuario == null) return false;
 		return PasswordManager.validate(password, usuario.getPassword());
 	}

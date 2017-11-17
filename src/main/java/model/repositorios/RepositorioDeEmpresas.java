@@ -33,7 +33,7 @@ public class RepositorioDeEmpresas {
 	}
 
 	public List<Short> getAllPeriodos()	{
-		List<Short> periodos = companies.stream().map(unaEmpresa -> unaEmpresa.obtenerPeríodos())
+		List<Short> periodos = companies.stream().map(unaEmpresa -> unaEmpresa.obtenerPeriodos())
 				.flatMap(unaListaDePeriodos -> unaListaDePeriodos.stream()).distinct()
 				.sorted(Collections.reverseOrder()).collect(Collectors.toList());
 		return periodos;

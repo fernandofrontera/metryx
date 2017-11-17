@@ -6,7 +6,7 @@ import java.util.List;
 import model.indicador.ConstructorDeIndicador;
 import model.indicador.Indicador;
 import model.indicador.IndicadorCalculado;
-import model.indicador.ConstructorDeIndicador.ExcepciónDeFórmulaInválida;
+import model.indicador.ConstructorDeIndicador.ExcepcionDeFormulaInvalida;
 import model.repositorios.RepositorioDeIndicadores;
 import model.repositorios.Repositorios;
 import model.repositorios.fuentes.FuenteDeIndicador;
@@ -28,15 +28,15 @@ public class FuenteDeIndicadorDePrueba implements FuenteDeIndicador {
 		
 	}
 	
-	public static void crearIndicador(String nombre, String fórmula) {
+	public static void crearIndicador(String nombre, String formula) {
 		ConstructorDeIndicador constructor = new ConstructorDeIndicador();
 		constructor.establecerNombre(nombre);
-		constructor.establecerFórmula(fórmula);
+		constructor.establecerFormula(formula);
 		
 		try {
 			Indicador indicador = constructor.construir();
 			Repositorios.obtenerRepositorioDeIndicadores().agregar(indicador);
-		} catch (ExcepciónDeFórmulaInválida e) {
+		} catch (ExcepcionDeFormulaInvalida e) {
 			e.printStackTrace();
 		}
 	}

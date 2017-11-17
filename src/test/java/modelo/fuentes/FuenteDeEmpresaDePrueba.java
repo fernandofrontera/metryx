@@ -64,8 +64,8 @@ public class FuenteDeEmpresaDePrueba implements FuenteDeEmpresa {
 		empresas.add(empresa);
 	}
 	
-	protected void crearCuenta(String nombre, Empresa empresa, int período, double valor) {
-		CuentaDeEmpresa cuenta = new CuentaDeEmpresa(nombre, "", empresa.getNombre(), (short) período, valor);
+	protected void crearCuenta(String nombre, Empresa empresa, int periodo, double valor) {
+		CuentaDeEmpresa cuenta = new CuentaDeEmpresa(nombre, "", empresa.getNombre(), (short) periodo, valor);
 		empresa.agregarCuenta(cuenta);
 	}
 	

@@ -21,14 +21,14 @@ public class FuenteJPADeMetodologia implements FuenteDeMetodologia {
 
 	@Override
 	public void guardar(RepositorioDeMetodologias repositorio, List<Metodologia> metodologias) {
-		EntityTransaction transacción = jpa.iniciarTransacción();
-		metodologias.forEach(metodología-> {
-			if(encontrarOriginal(metodología) == null) {
-				jpa.persistir(metodología);
-				this.metodologias.add(metodología);
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
+		metodologias.forEach(metodologia-> {
+			if(encontrarOriginal(metodologia) == null) {
+				jpa.persistir(metodologia);
+				this.metodologias.add(metodologia);
 			}
 		});
-		transacción.commit();
+		transaccion.commit();
 		repositorio.setMetodologias(this.metodologias);
 	}
 	
@@ -36,9 +36,9 @@ public class FuenteJPADeMetodologia implements FuenteDeMetodologia {
 		Metodologia original = encontrarOriginal(metodologia);
 		metodologias.remove(original);
 		if(original == null) return;
-		EntityTransaction transacción = jpa.iniciarTransacción();
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
 		jpa.remover(original);
-		transacción.commit();
+		transaccion.commit();
 	}
 	
 	private Metodologia encontrarOriginal(Metodologia metodologia) {
@@ -49,9 +49,9 @@ public class FuenteJPADeMetodologia implements FuenteDeMetodologia {
 	public void actualizar(Metodologia viejo, Metodologia nuevo) {
 		Metodologia original = encontrarOriginal(viejo);
 		metodologias.remove(original);
-		EntityTransaction transacción = jpa.iniciarTransacción();
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
 		jpa.remover(original);
 		jpa.persistir(nuevo);
-		transacción.commit();
+		transaccion.commit();
 	}
 }

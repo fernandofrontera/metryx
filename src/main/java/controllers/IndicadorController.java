@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import model.Empresa;
 import model.indicador.ConstructorDeIndicador;
-import model.indicador.ConstructorDeIndicador.ExcepciónDeFórmulaInválida;
+import model.indicador.ConstructorDeIndicador.ExcepcionDeFormulaInvalida;
 import model.indicador.Indicador;
 import model.repositorios.RepositorioDeIndicadores;
 import model.repositorios.Repositorios;
@@ -51,8 +51,8 @@ public class IndicadorController {
 
         ConstructorDeIndicador constructorDeIndicador = new ConstructorDeIndicador();
         constructorDeIndicador.establecerNombre(nombre);
-        constructorDeIndicador.establecerDescripción(descripcion);
-        constructorDeIndicador.establecerFórmula(formula);
+        constructorDeIndicador.establecerDescripcion(descripcion);
+        constructorDeIndicador.establecerFormula(formula);
 
         if(repositorio.existeIndicador(nombre))
             response.status(202);
@@ -61,7 +61,7 @@ public class IndicadorController {
                 Indicador nuevoIndicador = constructorDeIndicador.construir();
                 repositorio.agregar(nuevoIndicador);
                 response.status(201);
-            } catch(ExcepciónDeFórmulaInválida excepcion) {
+            } catch(ExcepcionDeFormulaInvalida excepcion) {
                 excepcion.printStackTrace();
                 response.status(500);
             }
@@ -93,13 +93,13 @@ public class IndicadorController {
 
             ConstructorDeIndicador constructorDeIndicador = new ConstructorDeIndicador();
             constructorDeIndicador.establecerNombre(nombreNuevo);
-            constructorDeIndicador.establecerDescripción(descripcion);
-            constructorDeIndicador.establecerFórmula(formula);
+            constructorDeIndicador.establecerDescripcion(descripcion);
+            constructorDeIndicador.establecerFormula(formula);
 
             try {
                 Indicador nuevoIndicador = constructorDeIndicador.construir();
                 repositorio.reemplazar(indicadorViejo, nuevoIndicador);
-            } catch(ExcepciónDeFórmulaInválida excepcion) {
+            } catch(ExcepcionDeFormulaInvalida excepcion) {
                 excepcion.printStackTrace();
                 response.status(500);
             }
@@ -133,7 +133,7 @@ public class IndicadorController {
         map.put("empresas", empresas);
         map.put("periodos", periodos);
         map.put("aplicable", "Indicador");
-        map.put("ruta", "."); // la única forma que se me ocurrió de solucionar el problema de los paths de los JS y CSS no encontrados por el nivel de profunidad de la ruta
+        map.put("ruta", "."); // la unica forma que se me ocurrio de solucionar el problema de los paths de los JS y CSS no encontrados por el nivel de profunidad de la ruta
 
         return new ModelAndView(map, "aplicar-indicador.hbs");
     }
@@ -143,7 +143,7 @@ public class IndicadorController {
         Short periodo = Short.valueOf(request.queryParams("periodo"));
         Empresa empresa = Repositorios.obtenerRepositorioDeEmpresas().encontrar(nombreEmpresa);
 
-        List<Indicador> indicadoresPosibles = repositorio.todos().stream().filter(unIndicador -> unIndicador.esVálidoParaContexto(empresa, periodo)).collect(Collectors.toList());
+        List<Indicador> indicadoresPosibles = repositorio.todos().stream().filter(unIndicador -> unIndicador.esValidoParaContexto(empresa, periodo)).collect(Collectors.toList());
 
         return indicadoresPosibles;
     }

@@ -7,51 +7,51 @@ import org.junit.Test;
 import model.Empresa;
 import model.indicador.ConstructorDeIndicador;
 import model.indicador.Indicador;
-import model.indicador.ConstructorDeIndicador.ExcepciónDeFórmulaInválida;
+import model.indicador.ConstructorDeIndicador.ExcepcionDeFormulaInvalida;
 
 public class PruebaDeIndicadores {
 
 	@Test
-	public void probarIndicadorVálido() throws Exception {
+	public void probarIndicadorValido() throws Exception {
 		String nombre = "IV";
-		String descripción = "El número áureo";
-		String fórmula = "1.61803398875";
+		String descripcion = "El numero aureo";
+		String formula = "1.61803398875";
 
 		ConstructorDeIndicador constructor = new ConstructorDeIndicador();
 		constructor.establecerNombre(nombre);
-		constructor.establecerDescripción(descripción);
-		constructor.establecerFórmula(fórmula);
+		constructor.establecerDescripcion(descripcion);
+		constructor.establecerFormula(formula);
 
 		Indicador indicador = constructor.construir();
 
 		assertEquals(nombre, indicador.getName());
-		assertEquals(descripción, indicador.obtenerDescripción());
-		assertEquals(fórmula, indicador.obtenerFórmula());
+		assertEquals(descripcion, indicador.obtenerDescripcion());
+		assertEquals(formula, indicador.obtenerFormula());
 	}
 	
-	@Test(expected = ExcepciónDeFórmulaInválida.class)
-	public void probarIndicadorInválido() throws Exception {
+	@Test(expected = ExcepcionDeFormulaInvalida.class)
+	public void probarIndicadorInvalido() throws Exception {
 		String nombre = "II";
-		String fórmula = "1:61803398875";
+		String formula = "1:61803398875";
 
 		ConstructorDeIndicador constructor = new ConstructorDeIndicador();
 		constructor.establecerNombre(nombre);
-		constructor.establecerFórmula(fórmula);
+		constructor.establecerFormula(formula);
 		constructor.construir();
 	}
 	
 	@Test
 	public void probarObtenerElValorDeUnIndicador() throws Exception {
 		String nombre = "nombre";
-		String descripción = "";
-		String fórmula = "1+2";
+		String descripcion = "";
+		String formula = "1+2";
 		
 		Empresa empresa = new Empresa("CompanyName");
 
 		ConstructorDeIndicador constructor = new ConstructorDeIndicador();
 		constructor.establecerNombre(nombre);
-		constructor.establecerDescripción(descripción);
-		constructor.establecerFórmula(fórmula);
+		constructor.establecerDescripcion(descripcion);
+		constructor.establecerFormula(formula);
 
 		Indicador indicador = constructor.construir();
 		

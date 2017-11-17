@@ -22,7 +22,7 @@ public class FuenteJPADeEmpresa implements FuenteDeEmpresa {
 	
 	@Override
 	public void guardar(RepositorioDeEmpresas repositorio, List<Empresa> empresas) {
-		EntityTransaction transacción = jpa.iniciarTransacción();
+		EntityTransaction transaccion = jpa.iniciarTransaccion();
 		Iterator<Empresa> iter = empresas.iterator();
 		while(iter.hasNext()) {
 			Empresa empresa = iter.next();
@@ -34,7 +34,7 @@ public class FuenteJPADeEmpresa implements FuenteDeEmpresa {
 				original.actualizar(empresa.getCuentas());
 			}
 		}
-		transacción.commit();
+		transaccion.commit();
 	}
 	
 	private Empresa encontrarOriginal(Empresa empresa) {

@@ -30,18 +30,18 @@ public class ConstructorDeMetodologia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void agregarCondición(CondicionTaxativa condiciónTaxativa) {
-		condicionesTaxativas.add(condiciónTaxativa);
+	public void agregarCondicion(CondicionTaxativa condicionTaxativa) {
+		condicionesTaxativas.add(condicionTaxativa);
 	}
 	
-	public void agregarCondición(CondicionComparativa condiciónComparativa) {
-		condicionesComparativas.add(condiciónComparativa);
+	public void agregarCondicion(CondicionComparativa condicionComparativa) {
+		condicionesComparativas.add(condicionComparativa);
 	}
 	
-	public void agregarCondición(CondicionTaxocomparativa condiciónTaxocomparativa) {
-		condicionesTaxocomparativas.add(condiciónTaxocomparativa);
-		//condicionesTaxativas.add(condiciónTaxocomparativa.obtenerCondiciónTaxativa());
-		//condicionesComparativas.add(condiciónTaxocomparativa.obtenerCondiciónComparativa());
+	public void agregarCondicion(CondicionTaxocomparativa condicionTaxocomparativa) {
+		condicionesTaxocomparativas.add(condicionTaxocomparativa);
+		//condicionesTaxativas.add(condicionTaxocomparativa.obtenerCondicionTaxativa());
+		//condicionesComparativas.add(condicionTaxocomparativa.obtenerCondicionComparativa());
 	}
 	
 	public List<Condicion> getCondiciones(){

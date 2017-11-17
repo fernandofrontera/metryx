@@ -26,11 +26,11 @@ public final class CondicionTaxativa extends Condicion {
 	CondicionTaxativa(
 			@JsonProperty("nombre") String nombre,
 			@JsonProperty("indicador") Indicador indicador, 
-			@JsonProperty("númeroDePeríodos") int númeroDePeríodos,
+			@JsonProperty("numeroDePeriodos") int numeroDePeriodos,
 			@JsonProperty("evaluacion") Evaluacion evaluacion,
 			@JsonProperty("orden") Orden orden,
 			@JsonProperty("valorDeReferencia") Double valorDeReferencia) {
-		super(nombre, indicador, númeroDePeríodos, evaluacion, orden);
+		super(nombre, indicador, numeroDePeriodos, evaluacion, orden);
 		this.valorDeReferencia = valorDeReferencia;
 	}
 	
@@ -50,7 +50,7 @@ public final class CondicionTaxativa extends Condicion {
 			return orden.comparar(evaluacion.evaluar(valores), valorDeReferencia);
 		}
 		
-		// Si no hay valor de referencia, se evalúa la tendencia
+		// Si no hay valor de referencia, se evalua la tendencia
 		for(int i = 1, cantidad = valores.size(); i < cantidad; i++) {
 			if(!orden.comparar(valores.get(i), valores.get(i-1))) {
 				return false;

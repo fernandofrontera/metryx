@@ -8,20 +8,20 @@ public abstract class ConstructorDeCondicion<T extends ConstructorDeCondicion<T>
 
 	protected String nombre;
 	protected String nombreDelIndicador;
-	protected int númeroDePeríodos;
+	protected int numeroDePeriodos;
 	protected Evaluacion evaluacion;
 	protected Orden orden;
 	protected Prioridad prioridad;
 	protected Double valorDeReferencia;
 	
 	public ConstructorDeCondicion(String nombre) {
-		// Precondición: que el indicador exista
-		// Si no se define nombre del indicador, se usa el nombre de la condición
+		// Precondicion: que el indicador exista
+		// Si no se define nombre del indicador, se usa el nombre de la condicion
 		this.nombre = nombre;
 		this.nombreDelIndicador = nombre;
 		
 		// Valores por defecto
-		this.númeroDePeríodos = 1;
+		this.numeroDePeriodos = 1;
 		this.evaluacion = Evaluacion.PROMEDIO;
 		this.orden = Orden.MAYOR;
 		this.prioridad = Prioridad.MEDIA;
@@ -32,11 +32,11 @@ public abstract class ConstructorDeCondicion<T extends ConstructorDeCondicion<T>
 		this.nombreDelIndicador = nombreDelIndicador;
 	}
 	
-	public void establecerNúmeroDePeríodos(int númeroDePeríodos) {
-		this.númeroDePeríodos = númeroDePeríodos;
+	public void establecerNumeroDePeriodos(int numeroDePeriodos) {
+		this.numeroDePeriodos = numeroDePeriodos;
 	}
 	
-	public void establecerEvaluación(Evaluacion evaluacion) {
+	public void establecerEvaluacion(Evaluacion evaluacion) {
 		this.evaluacion = evaluacion;
 	}
 	
@@ -49,13 +49,13 @@ public abstract class ConstructorDeCondicion<T extends ConstructorDeCondicion<T>
 		return obtenerEsto();
 	}
 	
-	public T conNúmeroDePeríodos(int númeroDePeríodos) {
-		establecerNúmeroDePeríodos(númeroDePeríodos);
+	public T conNumeroDePeriodos(int numeroDePeriodos) {
+		establecerNumeroDePeriodos(numeroDePeriodos);
 		return obtenerEsto();
 	}
 	
-	public T conEvaluación(Evaluacion evaluacion) {
-		establecerEvaluación(evaluacion);
+	public T conEvaluacion(Evaluacion evaluacion) {
+		establecerEvaluacion(evaluacion);
 		return obtenerEsto();
 	}
 	

@@ -20,16 +20,16 @@ public enum Evaluacion {
 	}
 	
 	private double mediana(List<Double> lista) {
-		// Para encontrar la mediana es necesario que la lista esté ordenada
+		// Para encontrar la mediana es necesario que la lista este ordenada
 		Collections.sort(lista);
 		
 		int tamaño = lista.size();
 		int medio = tamaño / 2;
 		if(tamaño % 2 == 1) {
-			// Número impar de elementos; la mediana es el que está en el medio
+			// Numero impar de elementos; la mediana es el que esta en el medio
 			return lista.get(medio);
 		}
-		// Número par de elementos; la mediana es la media de los dos del medio
+		// Numero par de elementos; la mediana es la media de los dos del medio
 		return (lista.get(medio-1) + lista.get(medio)) / 2.0;
 	}
 	

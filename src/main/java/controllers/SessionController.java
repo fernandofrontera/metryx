@@ -11,7 +11,7 @@ import spark.Response;
 
 public class SessionController {
 	
-	private static final int TREINTA_DÍAS = 2592000;
+	private static final int TREINTA_DiAS = 2592000;
 	
 	public ModelAndView showLogin(Request request, Response response) {
 		if(request.cookie("uid") != null) {
@@ -35,16 +35,16 @@ public class SessionController {
 		String password = request.queryParams("password");
 		
 		RepositorioDeUsuarios usuarios = Repositorios.obtenerRepositorioDeUsuarios();
-		boolean credencialesVálidas = usuarios.validarCredenciales(email, password);
+		boolean credencialesValidas = usuarios.validarCredenciales(email, password);
 		
-		if(credencialesVálidas) {
-			Usuario usuario = usuarios.encontrarPorCorreoElectrónico(email);
-			response.cookie("uid", String.valueOf(usuario.getId()), TREINTA_DÍAS);
+		if(credencialesValidas) {
+			Usuario usuario = usuarios.encontrarPorCorreoElectronico(email);
+			response.cookie("uid", String.valueOf(usuario.getId()), TREINTA_DiAS);
 		} else {
 			response.cookie("invalid-credentials", "1");
 		}
 		
-		response.redirect(credencialesVálidas ? "/" : "/login", 301);
+		response.redirect(credencialesValidas ? "/" : "/login", 301);
 		return null;
 	}
 	

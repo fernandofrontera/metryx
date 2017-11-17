@@ -25,11 +25,11 @@ public final class CondicionComparativa extends Condicion {
 	CondicionComparativa(
 			@JsonProperty("nombre") String nombre,
 			@JsonProperty("indicador") Indicador indicador,
-			@JsonProperty("númeroDePeríodos") int númeroDePeríodos,
+			@JsonProperty("numeroDePeriodos") int numeroDePeriodos,
 			@JsonProperty("evaluacion") Evaluacion evaluacion,
 			@JsonProperty("orden") Orden orden,
 			@JsonProperty("prioridad") Prioridad prioridad) {
-		super(nombre, indicador, númeroDePeríodos, evaluacion, orden);
+		super(nombre, indicador, numeroDePeriodos, evaluacion, orden);
 		this.prioridad = prioridad;
 	}
 	

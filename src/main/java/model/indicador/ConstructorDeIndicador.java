@@ -4,8 +4,8 @@ import model.indicador.AnalizadorSintactico.ParseFailedException;
 
 public class ConstructorDeIndicador {
 	@SuppressWarnings("serial")
-	public class ExcepciónDeFórmulaInválida extends Exception {
-		public ExcepciónDeFórmulaInválida(String message) {
+	public class ExcepcionDeFormulaInvalida extends Exception {
+		public ExcepcionDeFormulaInvalida(String message) {
 			super(message);
 		}
 	}
@@ -18,22 +18,22 @@ public class ConstructorDeIndicador {
 		this.name = name;
 	}
 	
-	public void establecerDescripción(String description) {
+	public void establecerDescripcion(String description) {
 		this.description = description;
 	}
 	
-	public void establecerFórmula(String formula) {
+	public void establecerFormula(String formula) {
 		this.formulaAsString = formula;
 	}
 
 
-	public Indicador construir() throws ExcepciónDeFórmulaInválida {
+	public Indicador construir() throws ExcepcionDeFormulaInvalida {
 		AnalizadorSintactico parser = new AnalizadorSintactico();
 		
 		try {
 			parser.obtenerCalculable(formulaAsString);
 		} catch (ParseFailedException e) {
-			throw new ExcepciónDeFórmulaInválida(e.getMessage());
+			throw new ExcepcionDeFormulaInvalida(e.getMessage());
 		}
 		
 		Indicador indicator = new Indicador(name, description, formulaAsString);

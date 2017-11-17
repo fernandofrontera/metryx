@@ -1,7 +1,7 @@
 package model.metodologia;
 
 public enum Prioridad {
-	MÁXIMA(5), ALTA(4), MEDIA(3), BAJA(2), MÍNIMA(1);
+	MaXIMA(5), ALTA(4), MEDIA(3), BAJA(2), MiNIMA(1);
 	
 	private int valor;
 	

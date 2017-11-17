@@ -18,7 +18,7 @@ public final class ConstructorDeCondicionTaxativa extends ConstructorDeCondicion
 	
 	@Override
 	public CondicionTaxativa construir() {
-		return new CondicionTaxativa(nombre, obtenerIndicador(), númeroDePeríodos, evaluacion, orden, valorDeReferencia);
+		return new CondicionTaxativa(nombre, obtenerIndicador(), numeroDePeriodos, evaluacion, orden, valorDeReferencia);
 	}
 
 	@Override

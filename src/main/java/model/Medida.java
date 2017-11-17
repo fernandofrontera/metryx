@@ -4,7 +4,7 @@ public interface Medida {
 	
 	public String getName();
 	
-	public String obtenerDescripción();
+	public String obtenerDescripcion();
 	
 	public double obtenerValor(Empresa company, short period);
 

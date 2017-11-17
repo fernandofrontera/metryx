@@ -38,8 +38,8 @@ public class PruebaPersistenciaDeIndicadores {
 		assertNotNull(obtenido);
 		assertEquals(1l, (long) obtenido.getId());
 		assertEquals(prueba1.getName(), obtenido.getName());
-		assertEquals(prueba1.obtenerDescripción(), obtenido.obtenerDescripción());
-		assertEquals(prueba1.obtenerFórmula(), obtenido.obtenerFórmula());
+		assertEquals(prueba1.obtenerDescripcion(), obtenido.obtenerDescripcion());
+		assertEquals(prueba1.obtenerFormula(), obtenido.obtenerFormula());
 	}
 	
 	@Test
@@ -53,8 +53,8 @@ public class PruebaPersistenciaDeIndicadores {
 		Indicador actualizado = indicadores.get(0);
 		assertNotNull(actualizado);
 		assertEquals(prueba2.getName(), actualizado.getName());
-		assertEquals(prueba2.obtenerDescripción(), actualizado.obtenerDescripción());
-		assertEquals(prueba2.obtenerFórmula(), actualizado.obtenerFórmula());
+		assertEquals(prueba2.obtenerDescripcion(), actualizado.obtenerDescripcion());
+		assertEquals(prueba2.obtenerFormula(), actualizado.obtenerFormula());
 	}
 	
 	@Test

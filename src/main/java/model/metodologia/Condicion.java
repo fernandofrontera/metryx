@@ -30,7 +30,7 @@ public abstract class Condicion extends Entidad {
 	protected Indicador indicador;
 	
 	@JsonProperty
-	protected int númeroDePeríodos;
+	protected int numeroDePeriodos;
 	
 	@JsonProperty
 	protected Evaluacion evaluacion;
@@ -40,10 +40,10 @@ public abstract class Condicion extends Entidad {
 	
 	protected Condicion() {}
 	
-	protected Condicion(String nombre, Indicador indicador, int númeroDePeríodos, Evaluacion evaluacion, Orden orden) {
+	protected Condicion(String nombre, Indicador indicador, int numeroDePeriodos, Evaluacion evaluacion, Orden orden) {
 		this.nombre = nombre;
 		this.indicador = indicador;
-		this.númeroDePeríodos = númeroDePeríodos;
+		this.numeroDePeriodos = numeroDePeriodos;
 		this.evaluacion = evaluacion;
 		this.orden = orden;
 	}
@@ -56,11 +56,11 @@ public abstract class Condicion extends Entidad {
 		return indicador;
 	}
 	
-	public int obtenerNúmeroDePeríodos() {
-		return númeroDePeríodos;
+	public int obtenerNumeroDePeriodos() {
+		return numeroDePeriodos;
 	}
 	
-	public Evaluacion obtenerEvaluación() {
+	public Evaluacion obtenerEvaluacion() {
 		return evaluacion;
 	}
 	
@@ -71,22 +71,22 @@ public abstract class Condicion extends Entidad {
 	public abstract List<Empresa> aplicar(List<Empresa> empresas);
 	
 	public boolean esAplicable(List<Empresa> empresas) {
-		return empresas.stream().allMatch(empresa -> períodosAEvaluar(empresa).stream()
-				.allMatch(período -> indicador.esVálidoParaContexto(empresa, período)));
+		return empresas.stream().allMatch(empresa -> periodosAEvaluar(empresa).stream()
+				.allMatch(periodo -> indicador.esValidoParaContexto(empresa, periodo)));
 	}
 	
-	protected List<Short> períodosAEvaluar(Empresa empresa) {
-		List<Short> períodos = empresa.obtenerPeríodos();
-		if(períodos.size() == 0) return períodos;
-		short períodoFinal = períodos.get(períodos.size()-1);
-		short períodoInicial = (short)(períodoFinal - númeroDePeríodos + 1);
-		int índiceInicial = períodos.indexOf(períodoInicial);
-		if(índiceInicial == -1) índiceInicial++;
-		return períodos.subList(índiceInicial, períodos.size());
+	protected List<Short> periodosAEvaluar(Empresa empresa) {
+		List<Short> periodos = empresa.obtenerPeriodos();
+		if(periodos.size() == 0) return periodos;
+		short periodoFinal = periodos.get(periodos.size()-1);
+		short periodoInicial = (short)(periodoFinal - numeroDePeriodos + 1);
+		int indiceInicial = periodos.indexOf(periodoInicial);
+		if(indiceInicial == -1) indiceInicial++;
+		return periodos.subList(indiceInicial, periodos.size());
 	}
 	
 	protected List<Double> valoresAEvaluar(Empresa empresa) {
-		return períodosAEvaluar(empresa).stream().map(período -> indicador.obtenerValor(empresa, período))
+		return periodosAEvaluar(empresa).stream().map(periodo -> indicador.obtenerValor(empresa, periodo))
 				.collect(Collectors.toList());
 	}
 	

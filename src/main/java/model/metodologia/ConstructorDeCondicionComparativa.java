@@ -17,7 +17,7 @@ public class ConstructorDeCondicionComparativa extends ConstructorDeCondicion<Co
 
 	@Override
 	public CondicionComparativa construir() {
-		return new CondicionComparativa(nombre, obtenerIndicador(), númeroDePeríodos, evaluacion, orden, prioridad);
+		return new CondicionComparativa(nombre, obtenerIndicador(), numeroDePeriodos, evaluacion, orden, prioridad);
 	}
 
 	@Override
