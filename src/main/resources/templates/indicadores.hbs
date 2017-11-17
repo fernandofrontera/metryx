@@ -1,0 +1,48 @@
+{{#partial "head"}}
+    <script src="./js/indicadores.js" defer></script>
+{{/partial}}
+
+{{#partial "body"}}
+<h3>Indicadores</h3>
+
+<div class="btn-toolbar" role="toolbar">
+    <button type="button" id="agregar-indicador" class="btn btn-success" data-toggle="modal" data-target="#modal">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <button type="button" id="modificar-indicador" class="btn btn-primary" data-toggle="modal" data-target="#modal" disabled>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+    </button>
+    <button type="button" id="borrar-indicador" class="btn btn-danger" disabled>
+        <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+</div>
+
+<select id="indicadores" multiple class="form-control">
+    {{#each indicadores}}
+    <option value="{{name}}">{{name}}</option>
+    {{/each}}
+</select>
+
+<div class="btn-toolbar" role="toolbar">
+    <button type="button" id="aplicar" class="btn btn-info" data-toggle="modal" data-target="#modal-indicador" disabled>
+        <i class="fa fa-check" aria-hidden="true"></i> Aplicar
+    </button>
+</div>
+{{/partial}}
+
+{{#partial "modal-cuerpo"}}
+<div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" class="form-control" value="{{name}}"/>
+</div>
+<div class="form-group">
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" class="form-control" value="{{description}}"/>
+</div>
+<div class="form-group">
+    <label for="formula">Fórmula:</label>
+    <input type="text" id="formula" name="formula" class="form-control" value="{{formula}}"/>
+</div>
+{{/partial}}
+
+{{>layout.hbs}}

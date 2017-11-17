@@ -1,0 +1,15 @@
+{{#partial "body"}}
+	<div class="jumbotron">
+		<div class="container">
+			{{#if usuario}}
+				<h2>Bienvenido a Metryx, <b>{{usuario.email}}</b></h2>
+			{{else}}
+				<h1>Sesión no iniciada</h1>
+				<p class="lead">Bienvenido al analizador de métricas financieras <b>Metryx</b>. Debes iniciar sesión para usar el sistema.</p>
+				<p><a class="btn btn-primary" href="/login" role="button">Iniciar sesión »</a></p>
+			{{/if}}
+		</div>
+	</div>
+{{/partial}}
+
+{{>layout.hbs}}

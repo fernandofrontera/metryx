@@ -1,0 +1,99 @@
+.navbar {
+    margin-bottom: 3rem;
+}
+
+.form-signin {
+	margin-top: 20px;
+	max-width: 330px;
+	padding: 10.5px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+#combo-empresas {
+    float: left;
+}
+
+#combo-periodos {
+    float: right;
+}
+
+#combo-periodos, #combo-empresas    {
+    width: 25%;
+    margin: 2.5em 0;
+}
+
+table *    {
+    text-align: center;
+}
+
+#cuentas    {
+    width: 100%;
+}
+
+#indicadores    {
+    display: block;
+    margin: 0.25rem auto 0;
+}
+
+#indicadores option {
+    font-size: 1.25rem;
+}
+
+#indicadores option:selected    {
+    background-color: rgba(200, 40, 40, 0.4);
+}
+
+.btn-toolbar button {
+    margin-right: 0.5rem;
+    text-align: center;
+}
+
+.main   {
+    width: 50%;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px #DDD;
+    padding-top: 1rem;
+}
+
+#modal-aplicar label    {
+    font-weight: bold;
+    font-size: 1.25rem;
+}

@@ -1,0 +1,39 @@
+{{> ../public/header.hbs }}
+
+<div class="container center-block main">{{#block "body"}}{{/block}}</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="titulo-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal"><span></span> {{aplicable}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{#block "modal-cuerpo"}}{{/block}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="guardar" type="button" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-aplicar" tabindex="-1" role="dialog" aria-labelledby="titulo-modal-aplicar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{#block "aplicar-cuerpo"}}{{/block}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> ../public/footer.hbs }}
